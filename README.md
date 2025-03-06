@@ -7,3 +7,7 @@ npm install @types/react @types/react-native @react-navigation/native-stack
 npx react-native run-ios
 
 npx react-native run-android
+
+npm install react-native-otp-inputs
+
+npm install @react-navigation/native @react-navigation/bottom-tabs react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons

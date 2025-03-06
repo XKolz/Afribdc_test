@@ -3,13 +3,12 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import CustomInput from '../components/CustomInput'; // Import reusable input
+import CustomButton from '../components/CustomButton'; // Import reusable button
 
-type Props = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
-const SignUpScreen: React.FC<Props> = ({navigation}) => {
+const LoginScreen: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* Back Button */}
@@ -20,38 +19,40 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
       </TouchableOpacity>
 
       {/* Title */}
-      <Text style={styles.title}>Create your account</Text>
+      <Text style={styles.title}>Login to your account</Text>
 
       {/* Input Fields */}
       <CustomInput label="Email" placeholder="Email" icon="envelope" />
-      <CustomInput label="Username" placeholder="Enter unique username" />
       <CustomInput
-        label="Create password"
+        label="Password"
         placeholder="Password"
         icon="lock"
         isPassword
       />
-      <CustomInput
-        label="Confirm password"
-        placeholder="Confirm password"
-        icon="lock"
-        isPassword
-      />
 
-      {/* Sign-Up Button */}
+      {/* Forgot Password */}
+      <TouchableOpacity
+        // onPress={() => console.log('Forgot Password')}
+        onPress={() => navigation.navigate('ResetPassword')}
+        style={styles.forgotPassword}>
+        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+      </TouchableOpacity>
+
+      {/* Login Button */}
       <CustomButton
-        title="Sign up"
-        onPress={() => console.log('Sign Up')}
+        title="Login"
+        // onPress={() => console.log('Login Pressed')}
+        onPress={() => navigation.navigate('Home')}
         type="primary"
       />
 
-      {/* Login Link */}
-      <Text style={styles.loginText}>
-        Already have an account?{' '}
+      {/* Sign-Up Link */}
+      <Text style={styles.signupText}>
+        Don’t have an account?{' '}
         <Text
-          onPress={() => navigation.navigate('Login')}
-          style={styles.loginLink}>
-          Login
+          onPress={() => navigation.navigate('SignUp')}
+          style={styles.signupLink}>
+          Sign up
         </Text>
       </Text>
     </View>
@@ -76,16 +77,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
-  loginText: {
+  forgotPassword: {
+    alignSelf: 'flex-end',
+    marginBottom: 20,
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    color: '#007AFF',
+    fontWeight: '500',
+  },
+  signupText: {
     fontSize: 14,
     textAlign: 'center',
     color: '#000',
     marginTop: 15,
   },
-  loginLink: {
+  signupLink: {
     color: '#007AFF',
     fontWeight: 'bold',
   },
 });
 
-export default SignUpScreen;
+export default LoginScreen;

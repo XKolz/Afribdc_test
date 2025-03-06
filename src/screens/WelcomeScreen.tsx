@@ -36,7 +36,12 @@ const WelcomeScreen: React.FC<Props> = ({navigation}) => {
 
       {/* Login Option */}
       <Text style={styles.loginText}>
-        Already have an account? <Text style={styles.loginLink}>Login</Text>
+        Already have an account?{' '}
+        <Text
+          onPress={() => navigation.navigate('Login')}
+          style={styles.loginLink}>
+          Login
+        </Text>
       </Text>
     </View>
   );

@@ -1,20 +1,28 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
+
+// Import Screens
 import SplashScreen from '../screens/SplashScreen';
 import ExchangeRatesScreen from '../screens/ExchangeRatesScreen';
-import HomeScreen from '../screens/HomeScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-// SignUpScreen
-// WelcomeScreen
+import LoginScreen from '../screens/LoginScreen';
+import ResetPasswordScreen from '../screens/ResetPasswordScreen';
+import OtpVerificationScreen from '../screens/OtpVerificationScreen';
+import ResetPasswordFormScreen from '../screens/ResetPasswordFormScreen';
+import TabNavigator from './TabNavigator'; // Import Tab Navigator
 
 export type RootStackParamList = {
   Splash: undefined;
   ExchangeRates: undefined;
-  Home: undefined;
   Welcome: undefined;
   SignUp: undefined;
+  Login: undefined;
+  ResetPassword: undefined;
+  OtpVerification: undefined;
+  ResetPasswordForm: undefined;
+  Home: undefined; // Home is now TabNavigator
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -39,14 +47,36 @@ const AppNavigator = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPasswordScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="OtpVerification"
+          component={OtpVerificationScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ResetPasswordForm"
+          component={ResetPasswordFormScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="ExchangeRates"
           component={ExchangeRatesScreen}
           options={{title: 'Exchange Rates'}}
         />
+
+        {/* Home now loads the Bottom Tabs */}
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
-          options={{title: 'Home'}}
+          component={TabNavigator}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
