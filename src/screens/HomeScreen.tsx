@@ -10,11 +10,10 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {RootTabParamList} from '../navigation/TabNavigator'; // Import Tab Param List
-import CustomButton from '../components/CustomButton';
 
-type Props = BottomTabScreenProps<RootTabParamList, 'Home'>;
+type Props = BottomTabScreenProps<RootTabParamList, 'HomeTab'>;
 
-const HomeScreen: React.FC<Props> = ({navigation}) => {
+const HomeScreen: React.FC<Props> = () => {
   const [balanceVisible, setBalanceVisible] = useState(true);
 
   // Sample Sell Offers Data
@@ -104,14 +103,6 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
           </View>
         )}
       />
-
-      {/* Bottom Navigation Placeholder */}
-      {/* <View style={styles.bottomNav}>
-        <Icon name="home" size={28} color="#1CA17E" />
-        <Icon name="wallet-outline" size={28} color="#777" />
-        <Icon name="shopping" size={28} color="#777" />
-        <Icon name="credit-card-outline" size={28} color="#777" />
-      </View> */}
     </View>
   );
 };
@@ -124,9 +115,6 @@ const ActionButton = ({icon, label}: {icon: string; label: string}) => (
   </TouchableOpacity>
 );
 
-// export default HomeScreen;
-
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

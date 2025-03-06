@@ -14,6 +14,8 @@ import ResetPasswordFormScreen from '../screens/ResetPasswordFormScreen';
 import TabNavigator from './TabNavigator'; // Import Tab Navigator
 import EnterPhoneNumberScreen from '../screens/EnterPhoneNumberScreen';
 import OtpPhoneVerifyScreen from '../screens/OtpPhoneVerifyScreen';
+import PersonalInformationScreen from '../screens/PersonalInformationScreen';
+import SetPinScreen from '../screens/SetPinScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -26,6 +28,8 @@ export type RootStackParamList = {
   ResetPasswordForm: undefined;
   EnterPhoneNumber: undefined;
   OtpPhoneVerify: undefined;
+  PersonalInformation: undefined;
+  SetPin: undefined;
   Home: undefined; // Home is now TabNavigator
 };
 
@@ -84,6 +88,16 @@ const AppNavigator = () => {
         <Stack.Screen
           name="OtpPhoneVerify"
           component={OtpPhoneVerifyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PersonalInformation"
+          component={PersonalInformationScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SetPin"
+          component={SetPinScreen}
           options={{headerShown: false}}
         />
 

@@ -41,7 +41,8 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
       {/* Sign-Up Button */}
       <CustomButton
         title="Sign up"
-        onPress={() => console.log('Sign Up')}
+        // onPress={() => console.log('Sign Up')}
+        onPress={() => navigation.navigate('PersonalInformation')}
         type="primary"
       />
 
