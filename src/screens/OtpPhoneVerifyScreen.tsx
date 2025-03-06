@@ -1,19 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../navigation/AppNavigator';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import CustomButton from '../components/CustomButton';
 import {
   CodeField,
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../navigation/AppNavigator';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'OtpVerification'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'OtpPhoneVerify'>;
 
 const CELL_COUNT = 6;
-const OtpVerificationScreen: React.FC<Props> = ({navigation}) => {
+const OtpPhoneVerifyScreen: React.FC<Props> = ({navigation}) => {
   const [countdown, setCountdown] = useState(59);
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
@@ -31,24 +29,14 @@ const OtpVerificationScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.backButton}>
-        <Icon name="chevron-left" size={18} color="#000" />
-      </TouchableOpacity>
+      <Text style={styles.title}>Verify phone</Text>
+      <Text style={styles.subtitle}>Please verify your phone number</Text>
 
-      <Text style={styles.title}>Reset Password</Text>
-
-      {/* Subtitle */}
-      <Text style={styles.subtitle}>Enter Code</Text>
-
-      {/* Email Masked Info */}
       <Text style={styles.infoText}>
-        We have sent an OTP verification code to{'\n'}
-        <Text style={styles.email}>ki******w****@gmail.com</Text>
+        We have sent a 6-digit verification code to {'\n'}
+        <Text style={styles.phoneNumber}>+1 (506) 210-0661</Text>
       </Text>
 
-      {/* OTP Input */}
       <CodeField
         ref={ref}
         {...props}
@@ -67,7 +55,6 @@ const OtpVerificationScreen: React.FC<Props> = ({navigation}) => {
         )}
       />
 
-      {/* Resend Code */}
       <TouchableOpacity
         disabled={countdown > 0}
         onPress={() => setCountdown(59)}>
@@ -79,12 +66,13 @@ const OtpVerificationScreen: React.FC<Props> = ({navigation}) => {
         </Text>
       </TouchableOpacity>
 
-      {/* Submit Button */}
-      <CustomButton
-        title="Submit"
-        onPress={() => navigation.navigate('ResetPasswordForm')}
-        type="primary"
-      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('SignUp')}
+        disabled={value.length < CELL_COUNT}
+        activeOpacity={0.7}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -92,87 +80,54 @@ const OtpVerificationScreen: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F9FAFB',
     paddingHorizontal: 20,
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  header: {
-    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 50,
-    marginBottom: 20,
-  },
-  backButton: {
-    // marginRight: 10,
-    position: 'absolute',
-    top: 40,
-    left: 20,
+    justifyContent: 'center',
   },
   title: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    color: '#1A1A1A',
   },
   subtitle: {
     fontSize: 16,
-    fontWeight: '600',
     textAlign: 'center',
-    marginBottom: 10,
+    color: '#333',
+    marginBottom: 20,
   },
   infoText: {
     fontSize: 14,
     textAlign: 'center',
     color: '#6C6C6C',
-    marginBottom: 20,
+    marginBottom: 10,
   },
-  email: {
+  phoneNumber: {
     fontWeight: 'bold',
+    color: '#1A1A1A',
   },
-  //
-  codeFieldRoot: {paddingVertical: 20},
+  codeFieldRoot: {
+    marginBottom: 20,
+    justifyContent: 'center',
+  },
   cell: {
     width: 50,
     height: 50,
-    fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex',
     borderWidth: 1,
     borderColor: '#ccc',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginHorizontal: 5,
-    borderRadius: 5,
     backgroundColor: '#fff',
   },
   cellText: {
     fontSize: 24,
-    textAlign: 'center',
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   focusCell: {
-    borderColor: '#007AFF',
-  },
-
-  //
-  otpContainer: {
-    width: '80%',
-    alignSelf: 'center',
-    height: 60,
-    marginBottom: 20,
-  },
-  otpBox: {
-    width: 50,
-    height: 50,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#D1D1D1',
-    textAlign: 'center',
-    fontSize: 18,
-    color: '#000',
-  },
-  otpActiveBox: {
     borderColor: '#007AFF',
   },
   resendText: {
@@ -181,6 +136,22 @@ const styles = StyleSheet.create({
     color: '#6C6C6C',
     marginBottom: 20,
   },
+  button: {
+    backgroundColor: '#10B981',
+    paddingVertical: 16,
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
-export default OtpVerificationScreen;
+export default OtpPhoneVerifyScreen;

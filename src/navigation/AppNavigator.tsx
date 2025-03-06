@@ -12,6 +12,8 @@ import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import OtpVerificationScreen from '../screens/OtpVerificationScreen';
 import ResetPasswordFormScreen from '../screens/ResetPasswordFormScreen';
 import TabNavigator from './TabNavigator'; // Import Tab Navigator
+import EnterPhoneNumberScreen from '../screens/EnterPhoneNumberScreen';
+import OtpPhoneVerifyScreen from '../screens/OtpPhoneVerifyScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -22,6 +24,8 @@ export type RootStackParamList = {
   ResetPassword: undefined;
   OtpVerification: undefined;
   ResetPasswordForm: undefined;
+  EnterPhoneNumber: undefined;
+  OtpPhoneVerify: undefined;
   Home: undefined; // Home is now TabNavigator
 };
 
@@ -69,7 +73,18 @@ const AppNavigator = () => {
         <Stack.Screen
           name="ExchangeRates"
           component={ExchangeRatesScreen}
-          options={{title: 'Exchange Rates'}}
+          // options={{title: 'Exchange Rates'}}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EnterPhoneNumber"
+          component={EnterPhoneNumberScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="OtpPhoneVerify"
+          component={OtpPhoneVerifyScreen}
+          options={{headerShown: false}}
         />
 
         {/* Home now loads the Bottom Tabs */}

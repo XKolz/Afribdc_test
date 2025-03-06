@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import CustomButton from '../components/CustomButton';
@@ -25,12 +25,11 @@ const WelcomeScreen: React.FC<Props> = ({navigation}) => {
       <CustomButton
         title="View Best Rate Now"
         onPress={() => navigation.navigate('ExchangeRates')}
-        // onPress={() => console.log('View Rates')}
         type="outline"
       />
       <CustomButton
         title="Get started"
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={() => navigation.navigate('EnterPhoneNumber')}
         type="primary"
       />
 
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#1A1A1A',
     marginBottom: 40,
-    fontWeight: '400',
+    fontWeight: '600',
     width: '80%',
   },
   loginText: {
