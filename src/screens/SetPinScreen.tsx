@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import {
   CodeField,
   useBlurOnFulfill,
@@ -7,6 +14,8 @@ import {
 } from 'react-native-confirmation-code-field';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CustomButton from '../components/CustomButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SetPin'>;
 
@@ -22,7 +31,16 @@ const SetPinScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Set Your Pin</Text>
+      {/* <Text style={styles.title}>Set Your Pin</Text> */}
+
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="chevron-left" size={30} color="#0C263A" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Set Your Pin</Text>
+      </View>
+
       <Text style={styles.subtitle}>
         Set up your 4-digit pin to make your account more secure. You'll be
         asked to enter this pin when making transactions.
@@ -46,13 +64,18 @@ const SetPinScreen: React.FC<Props> = ({navigation}) => {
         )}
       />
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         // onPress={() => console.log('Pin Set:', value)}
         onPress={() => navigation.navigate('Login')}
         disabled={value.length < 4}>
         <Text style={styles.buttonText}>Proceed</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <CustomButton
+        title="Proceed"
+        onPress={() => navigation.navigate('Login')}
+        disabled={value.length < 4}
+      />
     </View>
   );
 };
@@ -63,24 +86,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
     paddingHorizontal: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '400',
     textAlign: 'center',
-    color: '#1A1A1A',
+    flex: 1,
   },
   subtitle: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#6B7280',
-    marginBottom: 30,
+    color: '#6B777F',
+    fontWeight: '600',
+    lineHeight: 24,
+    marginTop: 50,
+    marginBottom: 100,
   },
   codeFieldRoot: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 40,
   },
   cell: {
     width: 50,
@@ -95,7 +125,7 @@ const styles = StyleSheet.create({
   },
   cellText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     textAlign: 'center',
     color: '#10B981',
   },

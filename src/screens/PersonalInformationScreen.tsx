@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
+import CustomButton from '../components/CustomButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PersonalInformation'>;
 
@@ -48,7 +49,12 @@ const PersonalInformationScreen: React.FC<Props> = ({navigation}) => {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled">
-        <Text style={styles.title}>Personal information</Text>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="chevron-left" size={20} color="#000" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Personal information</Text>
+        </View>
 
         <Text style={styles.label}>First name *</Text>
         <TextInput
@@ -148,12 +154,13 @@ const PersonalInformationScreen: React.FC<Props> = ({navigation}) => {
           keyboardType="numeric"
         />
 
-        <TouchableOpacity
-          style={styles.button}
-          //   onPress={() => console.log('Personal Info Submitted')}
-          onPress={() => navigation.navigate('SetPin')}>
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
+        <View style={{marginTop: 10}} />
+
+        <CustomButton
+          title="Continue"
+          onPress={() => navigation.navigate('SetPin')}
+          type="primary"
+        />
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -169,12 +176,18 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 30,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
     color: '#1A1A1A',
+    fontSize: 18,
+    fontWeight: '400',
+    // marginLeft: 10,
+    textAlign: 'center',
+    flex: 1,
   },
   label: {
     fontSize: 14,

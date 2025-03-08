@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   loginLink: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: '#2563EB',
+    fontWeight: '500',
   },
 });
 

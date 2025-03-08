@@ -50,7 +50,7 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
       <Text style={styles.signupText}>
         Don’t have an account?{' '}
         <Text
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('EnterPhoneNumber')}
           style={styles.signupLink}>
           Sign up
         </Text>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
   },
   backButton: {
     position: 'absolute',
@@ -72,10 +72,11 @@ const styles = StyleSheet.create({
     left: 20,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '500',
     textAlign: 'center',
     marginBottom: 20,
+    color: '#0C263A',
   },
   forgotPassword: {
     alignSelf: 'flex-end',
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     fontSize: 14,
-    color: '#007AFF',
+    color: '#2563EB',
     fontWeight: '500',
   },
   signupText: {
@@ -93,8 +94,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   signupLink: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: '#2563EB',
+    fontWeight: '500',
   },
 });
 

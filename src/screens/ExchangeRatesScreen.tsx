@@ -36,7 +36,7 @@ const ExchangeRatesScreen: React.FC<Props> = ({navigation}) => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="arrow-left" size={24} color="#000" />
+            <Icon name="chevron-left" size={30} color="#000" />
           </TouchableOpacity>
           <Text style={styles.title}>Exchange Rates</Text>
         </View>
@@ -72,6 +72,8 @@ const ExchangeRatesScreen: React.FC<Props> = ({navigation}) => {
           />
         </View>
 
+        <View style={{flex: 0.2}} />
+
         {/* CTA Section */}
         <CustomButton
           title="Get started"
@@ -95,7 +97,7 @@ const ExchangeRatesScreen: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   safeContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#F9F9F9',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   container: {
@@ -109,18 +111,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '400',
-    marginLeft: 10,
+    // marginLeft: 10,
     textAlign: 'center',
     flex: 1,
   },
   subtitle: {
     fontSize: 16,
     color: '#1A1A1A',
-    marginTop: 20,
+    marginTop: 30,
     fontWeight: '400',
   },
   listContainer: {
-    backgroundColor: '#F9F9F9',
+    backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
     marginVertical: 15,
@@ -128,9 +130,7 @@ const styles = StyleSheet.create({
   exchangeItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 12,
-    // borderBottomWidth: 1,
-    // borderColor: '#E0E0E0',
+    paddingVertical: 14,
   },
   userInfo: {
     flexDirection: 'row',
@@ -140,23 +140,24 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#E0F2F1',
+    backgroundColor: '#61CE701A',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
   },
   userInitials: {
-    fontWeight: 'bold',
+    fontWeight: '500',
     color: '#1CA17E',
   },
   userName: {
     fontWeight: '400',
   },
   exchangeRate: {
-    color: '#777',
+    color: '#6B777F',
+    fontWeight: '300',
   },
   status: {
-    fontWeight: 'bold',
+    fontWeight: '400',
   },
   selling: {
     color: '#22A37C',
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
   },
   loginLink: {
     color: '#007AFF',
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
 });
 

@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import {
   CodeField,
   useBlurOnFulfill,
@@ -7,6 +14,8 @@ import {
 } from 'react-native-confirmation-code-field';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomButton from '../components/CustomButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'OtpPhoneVerify'>;
 
@@ -29,12 +38,24 @@ const OtpPhoneVerifyScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Verify phone</Text>
-      <Text style={styles.subtitle}>Please verify your phone number</Text>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="chevron-left" size={20} color="#000" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Verify phone</Text>
+      </View>
+
+      <Text style={styles.subtitle}>
+        Please verify your phone {'\n'} number
+      </Text>
 
       <Text style={styles.infoText}>
-        We have sent a 6-digit verification code to {'\n'}
+        We have sent an 6-digit verification code to
+        {'\n'}
         <Text style={styles.phoneNumber}>+1 (506) 210-0661</Text>
+        {'\n'}
+        Enter this code below
       </Text>
 
       <CodeField
@@ -60,19 +81,17 @@ const OtpPhoneVerifyScreen: React.FC<Props> = ({navigation}) => {
         onPress={() => setCountdown(59)}>
         <Text style={styles.resendText}>
           Didn’t get the code?{' '}
-          <Text style={{color: countdown > 0 ? '#9A9A9A' : '#007AFF'}}>
+          <Text style={{color: countdown > 0 ? '#9A9A9A' : '#2563EB'}}>
             Resend code ({countdown}s)
           </Text>
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
+      <CustomButton
+        title="Submit"
         onPress={() => navigation.navigate('SignUp')}
         disabled={value.length < CELL_COUNT}
-        activeOpacity={0.7}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      />
     </View>
   );
 };
@@ -83,40 +102,49 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
     paddingHorizontal: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
     color: '#1A1A1A',
+    fontSize: 18,
+    fontWeight: '400',
+    // marginLeft: 10,
+    textAlign: 'center',
+    flex: 1,
   },
   subtitle: {
-    fontSize: 16,
     textAlign: 'center',
-    color: '#333',
-    marginBottom: 20,
+    color: '#0C263A',
+    fontSize: 18,
+    fontWeight: '600',
+    paddingVertical: 40,
   },
   infoText: {
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
-    color: '#6C6C6C',
-    marginBottom: 10,
+    color: '#6B777F',
+    marginBottom: 40,
+    lineHeight: 24,
+    fontWeight: '500',
   },
   phoneNumber: {
-    fontWeight: 'bold',
-    color: '#1A1A1A',
+    fontWeight: '500',
+    color: '#374151',
   },
   codeFieldRoot: {
-    marginBottom: 20,
+    marginBottom: 30,
     justifyContent: 'center',
   },
   cell: {
     width: 50,
-    height: 50,
+    height: 55,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
+    borderColor: '#0C263A',
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 5,
@@ -131,26 +159,11 @@ const styles = StyleSheet.create({
     borderColor: '#007AFF',
   },
   resendText: {
-    fontSize: 14,
+    fontSize: 15,
     textAlign: 'center',
-    color: '#6C6C6C',
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: '#10B981',
-    paddingVertical: 16,
-    width: '100%',
-    alignItems: 'center',
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#0C263A',
+    marginBottom: 40,
+    fontWeight: '500',
   },
 });
 

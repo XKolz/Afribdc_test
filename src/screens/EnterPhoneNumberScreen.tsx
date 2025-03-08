@@ -12,6 +12,8 @@ import CountryPicker, {
 } from 'react-native-country-picker-modal';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomButton from '../components/CustomButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'EnterPhoneNumber'>;
 
@@ -22,6 +24,13 @@ const EnterPhoneNumberScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      {/* Back Button */}
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}>
+        <Icon name="chevron-left" size={18} color="#000" />
+      </TouchableOpacity>
+
       <Text style={styles.title}>Enter Phone number</Text>
       <Text style={styles.subtitle}>We’ll send you a verification code</Text>
 
@@ -52,12 +61,12 @@ const EnterPhoneNumberScreen: React.FC<Props> = ({navigation}) => {
         />
       </View>
 
-      <TouchableOpacity
-        style={styles.button}
+      <CustomButton
+        title="Continue"
         onPress={() => navigation.navigate('OtpPhoneVerify')}
-        disabled={!phoneNumber.trim()}>
-        <Text style={styles.buttonText}>Continue</Text>
-      </TouchableOpacity>
+        type="primary"
+        disabled={!phoneNumber.trim()}
+      />
     </View>
   );
 };
@@ -69,6 +78,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
   },
   title: {
     fontSize: 24,
@@ -110,22 +124,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 10,
     color: '#1F2937',
-  },
-  button: {
-    backgroundColor: '#10B981',
-    paddingVertical: 16,
-    width: '100%',
-    alignItems: 'center',
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
   },
 });
 

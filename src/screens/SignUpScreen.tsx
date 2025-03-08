@@ -5,7 +5,6 @@ import {RootStackParamList} from '../navigation/AppNavigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
@@ -38,10 +37,11 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
         isPassword
       />
 
+      <View style={{flex: 0.08}} />
+
       {/* Sign-Up Button */}
       <CustomButton
         title="Sign up"
-        // onPress={() => console.log('Sign Up')}
         onPress={() => navigation.navigate('PersonalInformation')}
         type="primary"
       />
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
   },
   backButton: {
     position: 'absolute',
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   loginLink: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: '#2563EB',
+    fontWeight: '500',
   },
 });
 

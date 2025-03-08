@@ -23,7 +23,8 @@ const ResetPasswordScreen: React.FC<Props> = ({navigation}) => {
 
       {/* Instruction */}
       <Text style={styles.instruction}>
-        Enter your email address and we’ll send you an OTP verification code.
+        Enter your email address and we’ll
+        {'\n'}send you an OTP verification code.
       </Text>
 
       {/* Input Field */}
@@ -33,10 +34,11 @@ const ResetPasswordScreen: React.FC<Props> = ({navigation}) => {
         icon="envelope"
       />
 
+      <View style={{flex: 0.03}} />
+
       {/* Next Button */}
       <CustomButton
         title="Next"
-        // onPress={() => console.log('Proceed to OTP')}
         onPress={() => navigation.navigate('OtpVerification')}
         type="primary"
       />
@@ -70,15 +72,18 @@ const styles = StyleSheet.create({
   instruction: {
     fontSize: 14,
     textAlign: 'center',
-    color: '#6C6C6C',
+    color: '#0C263A',
+    fontWeight: '500',
     marginBottom: 20,
+    lineHeight: 24,
     width: '90%',
     alignSelf: 'center',
   },
   returnToLogin: {
-    fontSize: 14,
+    fontSize: 20,
     textAlign: 'center',
-    color: '#000',
+    color: '#0C263A',
+    fontWeight: '400',
     marginTop: 20,
   },
 });

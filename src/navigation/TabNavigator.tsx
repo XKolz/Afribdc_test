@@ -3,10 +3,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Import Screens
-import HomeScreen from '../screens/HomeScreen';
-import WalletScreen from '../screens/WalletScreen';
-import OrdersScreen from '../screens/OrdersScreen';
-import CardsScreen from '../screens/CardsScreen';
+import HomeScreen from '../screens/Dashboard/HomeScreen';
+import WalletScreen from '../screens/Dashboard/WalletScreen';
+import OrdersScreen from '../screens/Dashboard/OrdersScreen';
+import CardsScreen from '../screens/Dashboard/CardsScreen';
 
 // Define and Export Tab Param List
 export type RootTabParamList = {
@@ -34,9 +34,16 @@ const TabNavigator = () => {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#1CA17E',
+        tabBarActiveTintColor: '#22A37C',
         tabBarInactiveTintColor: '#777',
-        tabBarStyle: {paddingBottom: 10, height: 60},
+        tabBarStyle: {
+          paddingBottom: 10,
+          height: 60,
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
+          backgroundColor: '#FAFAFA',
+        },
       })}>
       <Tab.Screen
         name="HomeTab"

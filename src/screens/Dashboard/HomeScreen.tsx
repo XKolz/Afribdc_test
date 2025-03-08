@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {RootTabParamList} from '../navigation/TabNavigator'; // Import Tab Param List
+import {RootTabParamList} from '../../navigation/TabNavigator'; // Import Tab Param List
+import LinearGradient from 'react-native-linear-gradient';
 
 type Props = BottomTabScreenProps<RootTabParamList, 'HomeTab'>;
 
@@ -29,7 +30,10 @@ const HomeScreen: React.FC<Props> = () => {
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
-        <Image source={require('../assets/avatar.png')} style={styles.avatar} />
+        <Image
+          source={require('../../assets/avatar.png')}
+          style={styles.avatar}
+        />
         <Text style={styles.welcomeText}>Welcome back, Walter</Text>
         <TouchableOpacity>
           <Icon name="bell-outline" size={24} color="#000" />
@@ -46,22 +50,33 @@ const HomeScreen: React.FC<Props> = () => {
       </Text>
 
       {/* Wallet Balance */}
-      <View style={styles.balanceCard}>
-        <Icon name="wallet-outline" size={28} color="#fff" />
-        <Text style={styles.balanceTitle}>Current balance</Text>
-        <View style={styles.balanceRow}>
-          <Text style={styles.balanceAmount}>
-            {balanceVisible ? 'CAD. 0.00' : '•••••'}
-          </Text>
-          <TouchableOpacity onPress={() => setBalanceVisible(!balanceVisible)}>
-            <Icon
-              name={balanceVisible ? 'eye-off-outline' : 'eye-outline'}
-              size={20}
-              color="#fff"
-            />
-          </TouchableOpacity>
+      <LinearGradient
+        colors={['#0D3D2E', '#22A37C']} // Gradient colors
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        style={styles.balanceCard}>
+        {/* <Icon name="wallet-outline" size={28} color="#fff" /> */}
+        <Image
+          source={require('../../assets/empty-wallet.png')}
+          style={styles.emptyWallet}
+        />
+        <View>
+          <Text style={styles.balanceTitle}>Current balance</Text>
+          <View style={styles.balanceRow}>
+            <Text style={styles.balanceAmount}>
+              {balanceVisible ? 'CAD. 0.00' : '•••••'}
+            </Text>
+            <TouchableOpacity
+              onPress={() => setBalanceVisible(!balanceVisible)}>
+              <Icon
+                name={balanceVisible ? 'eye-off-outline' : 'eye-outline'}
+                size={20}
+                color="#fff"
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </LinearGradient>
 
       {/* Action Buttons */}
       <View style={styles.actionRow}>
@@ -79,30 +94,33 @@ const HomeScreen: React.FC<Props> = () => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        data={sellOffers}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <View style={styles.offerItem}>
-            <View style={styles.offerUser}>
-              <View style={styles.userIcon}>
-                <Text style={styles.userInitials}>WK</Text>
+      {/* <View> */}
+      <View style={styles.listContainer}>
+        <FlatList
+          data={sellOffers}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <View style={styles.offerItem}>
+              <View style={styles.offerUser}>
+                <View style={styles.userIcon}>
+                  <Text style={styles.userInitials}>WK</Text>
+                </View>
+                <View>
+                  <Text style={styles.userName}>{item.user}</Text>
+                  <Text style={styles.exchangeRate}>{item.rate}</Text>
+                </View>
               </View>
-              <View>
-                <Text style={styles.userName}>{item.user}</Text>
-                <Text style={styles.exchangeRate}>{item.rate}</Text>
-              </View>
+              <Text
+                style={[
+                  styles.status,
+                  item.status === 'Selling' ? styles.selling : styles.buying,
+                ]}>
+                {item.status}
+              </Text>
             </View>
-            <Text
-              style={[
-                styles.status,
-                item.status === 'Selling' ? styles.selling : styles.buying,
-              ]}>
-              {item.status}
-            </Text>
-          </View>
-        )}
-      />
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -110,7 +128,9 @@ const HomeScreen: React.FC<Props> = () => {
 // Action Button Component
 const ActionButton = ({icon, label}: {icon: string; label: string}) => (
   <TouchableOpacity style={styles.actionButton}>
-    <Icon name={icon} size={26} color="#1CA17E" />
+    <View style={styles.actionIcon}>
+      <Icon name={icon} size={26} color="#22A37C" />
+    </View>
     <Text style={styles.actionLabel}>{label}</Text>
   </TouchableOpacity>
 );
@@ -118,7 +138,7 @@ const ActionButton = ({icon, label}: {icon: string; label: string}) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
     paddingHorizontal: 20,
     paddingTop: 40,
   },
@@ -132,26 +152,31 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
   },
+  emptyWallet: {
+    width: 46,
+    height: 46,
+  },
   welcomeText: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '600',
     flex: 1,
-    marginLeft: 10,
+    textAlign: 'center',
   },
   notificationDot: {
     position: 'absolute',
-    top: 5,
-    right: 5,
+    top: 2,
+    right: 2,
     width: 8,
     height: 8,
     backgroundColor: 'red',
     borderRadius: 4,
   },
   idCheckButton: {
-    backgroundColor: '#FBC02D',
+    backgroundColor: '#E99B36',
     paddingVertical: 10,
     borderRadius: 8,
     marginTop: 20,
+    width: '45%',
     alignItems: 'center',
   },
   idCheckText: {
@@ -159,10 +184,10 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   verifyText: {
-    fontSize: 12,
-    color: '#777',
-    marginTop: 5,
-    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#6B777F',
+    marginTop: 10,
   },
   balanceCard: {
     backgroundColor: '#1CA17E',
@@ -170,10 +195,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 20,
     alignItems: 'center',
+    flexDirection: 'row',
+    gap: 50,
   },
   balanceTitle: {
     color: '#fff',
     fontSize: 14,
+    textAlign: 'center',
     marginTop: 10,
   },
   balanceRow: {
@@ -195,6 +223,11 @@ const styles = StyleSheet.create({
   actionButton: {
     alignItems: 'center',
   },
+  actionIcon: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 10,
+  },
   actionLabel: {
     marginTop: 5,
     fontSize: 12,
@@ -207,17 +240,22 @@ const styles = StyleSheet.create({
   },
   sellOffersTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '500',
+    color: '#0C263A',
   },
   seeAllText: {
-    color: '#007AFF',
+    color: '#004BEC',
+  },
+  listContainer: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 15,
   },
   offerItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderColor: '#E0E0E0',
+    paddingVertical: 14,
   },
   offerUser: {
     flexDirection: 'row',
@@ -227,29 +265,30 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#E0F2F1',
+    backgroundColor: '#61CE701A',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
   },
   userInitials: {
     fontWeight: 'bold',
-    color: '#1CA17E',
+    color: '#22A37C',
   },
   userName: {
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
   exchangeRate: {
-    color: '#777',
+    color: '#6B777F',
+    fontWeight: '300',
   },
   status: {
-    fontWeight: 'bold',
+    fontWeight: '400',
   },
   selling: {
-    color: 'green',
+    color: '#22A37C',
   },
   buying: {
-    color: 'blue',
+    color: '#22A37C',
   },
   bottomNav: {
     flexDirection: 'row',

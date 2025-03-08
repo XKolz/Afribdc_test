@@ -56,25 +56,33 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   label: {
-    fontSize: 14,
-    color: '#333',
+    fontSize: 13,
+    color: '#0C263A',
+    fontWeight: '400',
     marginBottom: 5,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     paddingHorizontal: 10,
     height: 50,
+    // Shadow for iOS
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    // Elevation for Android
+    elevation: 4,
   },
   icon: {
     marginRight: 10,
   },
   input: {
     flex: 1,
-    fontSize: 16,
-    color: '#333',
+    fontSize: 14,
+    color: '#6B777F',
   },
 });
 

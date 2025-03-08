@@ -14,8 +14,8 @@ const SplashScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to the App Test</Text>
-      <ActivityIndicator size="large" color="#3498db" />
+      <Text style={styles.text}>Welcome to the Afribdc_Test</Text>
+      <ActivityIndicator size="large" color="#22A37C" />
     </View>
   );
 };
