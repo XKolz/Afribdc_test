@@ -8,6 +8,7 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -30,65 +31,70 @@ const ExchangeRatesScreen: React.FC<Props> = ({navigation}) => {
   ];
 
   return (
-    // <View style={styles.container}>
     <SafeAreaView style={styles.safeContainer}>
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="chevron-left" size={30} color="#000" />
-          </TouchableOpacity>
-          <Text style={styles.title}>Exchange Rates</Text>
-        </View>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="chevron-left" size={30} color="#000" />
+            </TouchableOpacity>
+            <Text style={styles.title}>Exchange Rates</Text>
+          </View>
 
-        {/* Subtitle */}
-        <Text style={styles.subtitle}>Live exchange rates</Text>
+          {/* Subtitle */}
+          <Text style={styles.subtitle}>Live exchange rates</Text>
 
-        {/* Exchange Rates List */}
-        <View style={styles.listContainer}>
-          <FlatList
-            data={exchangeRates}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <View style={styles.exchangeItem}>
-                <View style={styles.userInfo}>
-                  <View style={styles.userIcon}>
-                    <Text style={styles.userInitials}>UN</Text>
+          {/* Exchange Rates List */}
+          <View style={styles.listContainer}>
+            <FlatList
+              data={exchangeRates}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => (
+                <View style={styles.exchangeItem}>
+                  <View style={styles.userInfo}>
+                    <View style={styles.userIcon}>
+                      <Text style={styles.userInitials}>UN</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.userName}>{item.user}</Text>
+                      <Text style={styles.exchangeRate}>Rate {item.rate}</Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={styles.userName}>{item.user}</Text>
-                    <Text style={styles.exchangeRate}>Rate {item.rate}</Text>
-                  </View>
+                  <Text
+                    style={[
+                      styles.status,
+                      item.status === 'Selling'
+                        ? styles.selling
+                        : styles.buying,
+                    ]}>
+                    {item.status}
+                  </Text>
                 </View>
-                <Text
-                  style={[
-                    styles.status,
-                    item.status === 'Selling' ? styles.selling : styles.buying,
-                  ]}>
-                  {item.status}
-                </Text>
-              </View>
-            )}
+              )}
+              scrollEnabled={false}
+              nestedScrollEnabled={false}
+            />
+          </View>
+
+          <View style={{flex: 0.2}} />
+
+          {/* CTA Section */}
+          <CustomButton
+            title="Get started"
+            onPress={() => navigation.navigate('EnterPhoneNumber')}
+            type="primary"
           />
-        </View>
-
-        <View style={{flex: 0.2}} />
-
-        {/* CTA Section */}
-        <CustomButton
-          title="Get started"
-          onPress={() => navigation.navigate('EnterPhoneNumber')}
-          type="primary"
-        />
-        <Text style={styles.loginText}>
-          Already have an account?{' '}
-          <Text
-            style={styles.loginLink}
-            onPress={() => navigation.navigate('Login')}>
-            Login
+          <Text style={styles.loginText}>
+            Already have an account?{' '}
+            <Text
+              style={styles.loginLink}
+              onPress={() => navigation.navigate('Login')}>
+              Login
+            </Text>
           </Text>
-        </Text>
-      </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -100,6 +106,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
+  scrollContainer: {
+    flexGrow: 1,
+    // paddingBottom: 20,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
@@ -107,11 +117,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    // marginTop: 10,
   },
   title: {
     fontSize: 20,
     fontWeight: '400',
-    // marginLeft: 10,
     textAlign: 'center',
     flex: 1,
   },
@@ -171,6 +181,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     marginTop: 15,
+    // marginBottom: 20,
   },
   loginLink: {
     color: '#007AFF',

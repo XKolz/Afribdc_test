@@ -108,3 +108,22 @@ npm install react-native-otp-inputs
 npm install @react-navigation/native @react-navigation/bottom-tabs react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons
 
 npm install react-native-country-picker-modal
+
+# Build
+
+Manual APK Build
+Navigate to the Android Directory
+sh
+Copy
+Edit
+cd android
+Generate APK
+sh
+Copy
+Edit
+./gradlew assembleRelease
+Find Your APK The APK will be located in:
+swift
+Copy
+Edit
+android/app/build/outputs/apk/release/app-release.apk

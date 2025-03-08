@@ -88,7 +88,7 @@ const PersonalInformationScreen: React.FC<Props> = ({navigation}) => {
         </View>
 
         <Text style={styles.label}>Country of residence</Text>
-        <View style={styles.pickerContainer}>
+        <View style={styles.statePickerContainer}>
           <DropDownPicker
             open={open}
             value={value}
@@ -226,6 +226,11 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     marginBottom: 15,
+    zIndex: 100,
+  },
+  statePickerContainer: {
+    marginBottom: 15,
+    // zIndex: 50,
   },
   dropdown: {
     borderWidth: 1,

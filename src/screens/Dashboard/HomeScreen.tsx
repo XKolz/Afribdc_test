@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {RootTabParamList} from '../../navigation/TabNavigator'; // Import Tab Param List
+import {RootTabParamList} from '../../navigation/TabNavigator';
 import LinearGradient from 'react-native-linear-gradient';
 
 type Props = BottomTabScreenProps<RootTabParamList, 'HomeTab'>;
@@ -66,16 +66,15 @@ const HomeScreen: React.FC<Props> = () => {
             <Text style={styles.balanceAmount}>
               {balanceVisible ? 'CAD. 0.00' : '•••••'}
             </Text>
-            <TouchableOpacity
-              onPress={() => setBalanceVisible(!balanceVisible)}>
-              <Icon
-                name={balanceVisible ? 'eye-off-outline' : 'eye-outline'}
-                size={20}
-                color="#fff"
-              />
-            </TouchableOpacity>
           </View>
         </View>
+        <TouchableOpacity onPress={() => setBalanceVisible(!balanceVisible)}>
+          <Icon
+            name={balanceVisible ? 'eye-off-outline' : 'eye-outline'}
+            size={20}
+            color="#fff"
+          />
+        </TouchableOpacity>
       </LinearGradient>
 
       {/* Action Buttons */}
@@ -196,7 +195,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 50,
+    // gap: 50,
+    justifyContent: 'space-between',
   },
   balanceTitle: {
     color: '#fff',
